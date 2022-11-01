@@ -2,15 +2,23 @@ package com.revature.entities;
 
 import com.revature.utils.Role;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name="users")
 public class User {
+    @Id
     private int user_id;
+    @Column(nullable = false, unique = true)
     private String username;
+    @Column(nullable = false)
     private String password;
     private String first_name;
     private String last_name;
+    @Column(unique = true)
     private String email;
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     public User(int user_id, String username, String password, String first_name, String last_name, String email, Role role) {

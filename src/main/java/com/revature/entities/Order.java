@@ -1,8 +1,12 @@
 package com.revature.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.sql.Timestamp;
 import java.util.Objects;
 
+@Entity
+@Table(name="orders")
 public class Order {
     private int order_id;
     private User user;

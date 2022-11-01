@@ -2,13 +2,20 @@ package com.revature.entities;
 
 import com.revature.utils.Material;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name="items")
 public class Item {
+    @Id
     private int item_id;
     private String image;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private double price;
+    @Enumerated(EnumType.STRING)
     private Material material;
 
     public Item(int item_id, String image, String name, double price, Material material) {
