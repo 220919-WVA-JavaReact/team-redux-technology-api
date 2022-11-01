@@ -73,7 +73,9 @@
 
 		<profile>
 			<id>prod</id>
-
+<!--			<activation>-->
+<!--				<activeByDefault>true</activeByDefault>-->
+<!--			</activation>-->
 			<properties>
 				<build.profile.id>prod</build.profile.id>
 				<profileActive>prod</profileActive>

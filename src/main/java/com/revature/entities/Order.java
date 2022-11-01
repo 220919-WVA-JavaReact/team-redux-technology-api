@@ -3,12 +3,13 @@ package com.revature.entities;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Table(name="orders")
 public class Order {
     @Id
-    private int order_id;
+    private String order_id;
 
     @ManyToOne
     @JoinColumn(name="user_id")
@@ -20,7 +21,7 @@ public class Order {
     private int quantity;
     private Timestamp purchase_date;
 
-    public Order(int order_id, User user, Item item, int quantity, Timestamp purchase_date) {
+    public Order(String order_id, User user, Item item, int quantity, Timestamp purchase_date) {
         this.order_id = order_id;
         this.user = user;
         this.item = item;
@@ -28,11 +29,15 @@ public class Order {
         this.purchase_date = purchase_date;
     }
 
-    public int getOrder_id() {
+    public Order() {
+        this.order_id = UUID.randomUUID().toString();
+    }
+
+    public String getOrder_id() {
         return order_id;
     }
 
-    public void setOrder_id(int order_id) {
+    public void setOrder_id(String order_id) {
         this.order_id = order_id;
     }
 

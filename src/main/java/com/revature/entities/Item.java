@@ -4,12 +4,13 @@ import com.revature.utils.Material;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Table(name="items")
 public class Item {
     @Id
-    private int item_id;
+    private String item_id;
     @Column
     private String image;
     @Column(nullable = false)
@@ -19,7 +20,7 @@ public class Item {
     @Enumerated(EnumType.STRING)
     private Material material;
 
-    public Item(int item_id, String image, String name, double price, Material material) {
+    public Item(String item_id, String image, String name, double price, Material material) {
         this.item_id = item_id;
         this.image = image;
         this.name = name;
@@ -28,13 +29,14 @@ public class Item {
     }
 
     public Item() {
+        this.item_id = UUID.randomUUID().toString();
     }
 
-    public int getItem_id() {
+    public String getItem_id() {
         return item_id;
     }
 
-    public void setItem_id(int item_id) {
+    public void setItem_id(String item_id) {
         this.item_id = item_id;
     }
 

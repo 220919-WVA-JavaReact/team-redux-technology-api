@@ -4,12 +4,13 @@ import com.revature.utils.Role;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Table(name="users")
 public class User {
     @Id
-    private int user_id;
+    private String user_id;
     @Column(nullable = false, unique = true)
     private String username;
     @Column(nullable = false)
@@ -21,7 +22,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public User(int user_id, String username, String password, String first_name, String last_name, String email, Role role) {
+    public User(String user_id, String username, String password, String first_name, String last_name, String email, Role role) {
         this.user_id = user_id;
         this.username = username;
         this.password = password;
@@ -32,13 +33,14 @@ public class User {
     }
 
     public User() {
+        this.user_id = UUID.randomUUID().toString();
     }
 
-    public int getUser_id() {
+    public String getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(int user_id) {
+    public void setUser_id(String user_id) {
         this.user_id = user_id;
     }
 
