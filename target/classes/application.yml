@@ -1,10 +1,4 @@
 spring:
-  datasource:
-    url: ${DB_URL}
-    username: ${DB_USER}
-    password: ${DB_PASS}
-  jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-    hibernate:
-      ddl-auto: create # specifies how hibernate should interact with existing tables
-    show-sql: true
+  profiles:
+    active:
+      - "@profileActive"
