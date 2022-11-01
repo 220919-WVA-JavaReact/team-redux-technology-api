@@ -1,10 +1,10 @@
-package com.revature.models;
+package com.revature.entities;
 
 import com.revature.utils.Role;
 
 import java.util.Objects;
 
-public class Users {
+public class User {
     private int user_id;
     private String username;
     private String password;
@@ -13,7 +13,7 @@ public class Users {
     private String email;
     private Role role;
 
-    public Users(int user_id, String username, String password, String first_name, String last_name, String email, Role role) {
+    public User(int user_id, String username, String password, String first_name, String last_name, String email, Role role) {
         this.user_id = user_id;
         this.username = username;
         this.password = password;
@@ -23,7 +23,7 @@ public class Users {
         this.role = role;
     }
 
-    public Users() {
+    public User() {
     }
 
     public int getUser_id() {
@@ -99,7 +99,7 @@ public class Users {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Users users = (Users) o;
+        User users = (User) o;
         return user_id == users.user_id && username.equals(users.username) && password.equals(users.password) && first_name.equals(users.first_name) && last_name.equals(users.last_name) && email.equals(users.email) && role == users.role;
     }
 

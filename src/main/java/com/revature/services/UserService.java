@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+//@Scope("Singleton") <- this is implicit
 public class UserService {
     private UserRepository ur;
 

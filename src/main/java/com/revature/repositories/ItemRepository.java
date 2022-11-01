@@ -1,9 +1,9 @@
 package com.revature.repositories;
 
-import com.revature.entities.User;
+import com.revature.entities.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface ItemRepository extends JpaRepository<Item, Integer> {
 }

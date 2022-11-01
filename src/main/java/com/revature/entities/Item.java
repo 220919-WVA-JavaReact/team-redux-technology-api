@@ -1,17 +1,17 @@
-package com.revature.models;
+package com.revature.entities;
 
 import com.revature.utils.Material;
 
 import java.util.Objects;
 
-public class Items {
+public class Item {
     private int item_id;
     private String image;
     private String name;
     private double price;
     private Material material;
 
-    public Items(int item_id, String image, String name, double price, Material material) {
+    public Item(int item_id, String image, String name, double price, Material material) {
         this.item_id = item_id;
         this.image = image;
         this.name = name;
@@ -19,7 +19,7 @@ public class Items {
         this.material = material;
     }
 
-    public Items() {
+    public Item() {
     }
 
     public int getItem_id() {
@@ -77,7 +77,7 @@ public class Items {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Items items = (Items) o;
+        Item items = (Item) o;
         return item_id == items.item_id && Double.compare(items.price, price) == 0 && image.equals(items.image) && name.equals(items.name) && material == items.material;
     }
 
