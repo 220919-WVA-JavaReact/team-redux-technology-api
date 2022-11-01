@@ -10,6 +10,7 @@ import java.util.Objects;
 public class Item {
     @Id
     private int item_id;
+    @Column
     private String image;
     @Column(nullable = false)
     private String name;

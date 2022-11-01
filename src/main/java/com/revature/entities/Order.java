@@ -1,16 +1,22 @@
 package com.revature.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
 @Table(name="orders")
 public class Order {
+    @Id
     private int order_id;
+
+    @ManyToOne
+    @JoinColumn(name="user_id")
     private User user;
+    @ManyToOne
+    @JoinColumn(name="item_id")
     private Item item;
+    @Column(nullable = false)
     private int quantity;
     private Timestamp purchase_date;
 
