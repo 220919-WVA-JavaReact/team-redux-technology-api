@@ -9,3 +9,6 @@ spring:
     hibernate:
       ddl-auto: create # specifies how hibernate should interact with existing tables
     show-sql: true
+  h2:
+    console:
+      enabled: true
