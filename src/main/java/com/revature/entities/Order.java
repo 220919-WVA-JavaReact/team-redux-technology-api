@@ -15,7 +15,7 @@ public class Order {
     @JoinColumn(name="user_id")
     private User user;
     @ManyToOne
-    @JoinColumn(name="item_id")
+    @JoinColumn(name="item_id", nullable=false)
     private Item item;
     @Column(nullable = false)
     private int quantity;
