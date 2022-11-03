@@ -1,19 +1,28 @@
-package com.revature.models;
+package com.revature.entities;
 
 import com.revature.utils.Role;
 
+import javax.persistence.*;
 import java.util.Objects;
+import java.util.UUID;
 
-public class Users {
-    private int user_id;
+@Entity
+@Table(name="users")
+public class User {
+    @Id
+    private String user_id;
+    @Column(nullable = false, unique = true)
     private String username;
+    @Column(nullable = false)
     private String password;
     private String first_name;
     private String last_name;
+    @Column(unique = true)
     private String email;
+    @Enumerated(EnumType.STRING)
     private Role role;
 
-    public Users(int user_id, String username, String password, String first_name, String last_name, String email, Role role) {
+    public User(String user_id, String username, String password, String first_name, String last_name, String email, Role role) {
         this.user_id = user_id;
         this.username = username;
         this.password = password;
@@ -23,14 +32,15 @@ public class Users {
         this.role = role;
     }
 
-    public Users() {
+    public User() {
+        this.user_id = UUID.randomUUID().toString();
     }
 
-    public int getUser_id() {
+    public String getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(int user_id) {
+    public void setUser_id(String user_id) {
         this.user_id = user_id;
     }
 
@@ -99,7 +109,7 @@ public class Users {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Users users = (Users) o;
+        User users = (User) o;
         return user_id == users.user_id && username.equals(users.username) && password.equals(users.password) && first_name.equals(users.first_name) && last_name.equals(users.last_name) && email.equals(users.email) && role == users.role;
     }
 

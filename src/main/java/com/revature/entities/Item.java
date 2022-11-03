@@ -1,17 +1,26 @@
-package com.revature.models;
+package com.revature.entities;
 
 import com.revature.utils.Material;
 
+import javax.persistence.*;
 import java.util.Objects;
+import java.util.UUID;
 
-public class Items {
-    private int item_id;
+@Entity
+@Table(name="items")
+public class Item {
+    @Id
+    private String item_id;
+    @Column
     private String image;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private double price;
+    @Enumerated(EnumType.STRING)
     private Material material;
 
-    public Items(int item_id, String image, String name, double price, Material material) {
+    public Item(String item_id, String image, String name, double price, Material material) {
         this.item_id = item_id;
         this.image = image;
         this.name = name;
@@ -19,14 +28,15 @@ public class Items {
         this.material = material;
     }
 
-    public Items() {
+    public Item() {
+        this.item_id = UUID.randomUUID().toString();
     }
 
-    public int getItem_id() {
+    public String getItem_id() {
         return item_id;
     }
 
-    public void setItem_id(int item_id) {
+    public void setItem_id(String item_id) {
         this.item_id = item_id;
     }
 
@@ -77,7 +87,7 @@ public class Items {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Items items = (Items) o;
+        Item items = (Item) o;
         return item_id == items.item_id && Double.compare(items.price, price) == 0 && image.equals(items.image) && name.equals(items.name) && material == items.material;
     }
 

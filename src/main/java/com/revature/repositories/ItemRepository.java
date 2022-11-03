@@ -1,11 +1,10 @@
 package com.revature.repositories;
 
-import com.revature.entities.User;
+import com.revature.entities.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, String> {
+public interface ItemRepository extends JpaRepository<Item, String> {
 
-    User findByUsername(String username);
 }
