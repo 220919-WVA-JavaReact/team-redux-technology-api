@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ItemService {
@@ -19,5 +20,11 @@ public class ItemService {
 
     public List<Item> getAllItems(){
         return ir.findAll();
+    }
+
+
+    public Optional<Item> getItemById(String id) {
+        //find Item by Id for single page display
+        return ir.findById(id);
     }
 }
