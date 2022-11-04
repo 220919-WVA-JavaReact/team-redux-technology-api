@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/minecraft-store.iml" filepath="$PROJECT_DIR$/minecraft-store.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/team-redux-technology-api.iml" filepath="$PROJECT_DIR$/.idea/team-redux-technology-api.iml" />
     </modules>
   </component>
 </project>

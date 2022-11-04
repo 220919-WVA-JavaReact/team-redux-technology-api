@@ -24,7 +24,7 @@ public class ItemController {
         this.is = is;
     }
 
-    @GetMapping
+    @GetMapping // all items
     public ResponseEntity<List<Item>> getItems(){
         return new ResponseEntity<>(is.getAllItems(), HttpStatus.OK);
     }
@@ -41,4 +41,9 @@ public class ItemController {
 
     }
 
+    @GetMapping("/random/{count}")
+    // get a random list of {count} items
+    public ResponseEntity<List<Item>> getRandomItems(@PathVariable("count") int count){
+        return new ResponseEntity<>(is.getRandomItems(count), HttpStatus.OK);
+    }
 }
