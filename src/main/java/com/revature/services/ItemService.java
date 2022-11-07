@@ -2,6 +2,7 @@ package com.revature.services;
 
 import com.revature.entities.Item;
 import com.revature.repositories.ItemRepository;
+import com.revature.utils.Material;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,5 +51,9 @@ public class ItemService {
     public Optional<Item> getItemById(String id) {
         //find Item by Id for single page display
         return ir.findById(id);
+    }
+
+    public Item getItemByNameAndMaterial(String name, String material){
+        return ir.findByNameAndMaterialAllIgnoreCase(name, Material.valueOf((material)));
     }
 }
