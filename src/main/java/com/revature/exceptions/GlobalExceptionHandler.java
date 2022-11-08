@@ -11,4 +11,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(LoginException.class)
     public void handleLoginException(){
     }
+
+    @ResponseStatus(value = HttpStatus.NOT_FOUND, reason= "User not found.")
+    @ExceptionHandler(UserNotFoundException.class)
+    public void handleUserNotFoundException(){
+
+    }
 }
