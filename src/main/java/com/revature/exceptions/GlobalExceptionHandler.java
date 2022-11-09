@@ -11,4 +11,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(LoginException.class)
     public void handleLoginException(){
     }
+
+    @ResponseStatus(value = HttpStatus.UNAUTHORIZED, reason = "User needs to be signed in to perform this operation.")
+    @ExceptionHandler(AuthenticationException.class)
+    public void handleAuthenticationException(){}
 }
