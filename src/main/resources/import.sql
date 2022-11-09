@@ -39,6 +39,3 @@ insert into items (item_id, image, name, price, material) values ('ibt', '', 'Bo
 insert into items (item_id, image, name, price, material) values ('gbt', '', 'Boots', 29.99,  'GOLD');
 insert into items (item_id, image, name, price, material) values ('dbt', '', 'Boots', 59.99,  'DIAMOND');
 insert into items (item_id, image, name, price, material) values ('nbt', '', 'Boots', 149.99, 'NETHERITE');
-
-insert into orders (order_id, user_id, item_id, quantity) values ('1', 'a', 'fghgfrt', 1);
-insert into orders (order_id, user_id, item_id, quantity) values ('2', 'b', '34dffdf', 1);

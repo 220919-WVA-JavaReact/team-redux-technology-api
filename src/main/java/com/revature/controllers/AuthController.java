@@ -20,7 +20,7 @@ public class AuthController {
     private TokenService ts;
 
     @Autowired
-    public AuthController(AuthService as){
+    public AuthController(AuthService as, TokenService ts){
         this.as = as;
         this.ts = ts;
     }
