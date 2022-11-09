@@ -12,7 +12,15 @@ public class GlobalExceptionHandler {
     public void handleLoginException(){
     }
 
+
     @ResponseStatus(value = HttpStatus.UNAUTHORIZED, reason = "User needs to be signed in to perform this operation.")
     @ExceptionHandler(AuthenticationException.class)
     public void handleAuthenticationException(){}
+
+    @ResponseStatus(value = HttpStatus.NOT_FOUND, reason= "User not found.")
+    @ExceptionHandler(UserNotFoundException.class)
+    public void handleUserNotFoundException(){
+
+    }
+
 }
