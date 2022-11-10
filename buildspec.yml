@@ -1,0 +1,15 @@
+version: 0.2
+
+phases:
+  install:
+    java: corretto17
+  build:
+    commands:
+      - mvn clean package -Pprod
+  post_build:
+    commands:
+      -mv target/*.jar ./minecraft-store.jar
+
+artifacts:
+  files:
+    - minecraft-store.jar

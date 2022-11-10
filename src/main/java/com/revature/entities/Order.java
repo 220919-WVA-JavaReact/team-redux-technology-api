@@ -1,5 +1,7 @@
 package com.revature.entities;
 
+import com.revature.dtos.OrderDTO;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -27,6 +29,17 @@ public class Order {
         this.item = item;
         this.quantity = quantity;
         this.purchase_date = purchase_date;
+    }
+
+    public Order(OrderDTO odto){
+        // for creating new orders via http request
+        // this gets everything needed from the orderDTO, generating a new id and purchase date,
+        // the user info still needs to be added manually if applicable
+        this.order_id = UUID.randomUUID().toString();
+        this.user = null;
+        this.item = odto.getItem();
+        this.quantity = odto.getQuantity();
+        this.purchase_date = new Timestamp(System.currentTimeMillis());
     }
 
     public Order() {

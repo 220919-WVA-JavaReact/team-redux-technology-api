@@ -25,18 +25,28 @@ public class OrderService {
         this.ur = ur;
     }
 
-    public Order saveOrder(Order order){
-        return or.save(order);
+    public OrderDTO saveOrder(OrderDTO order){
+        Order sendOrder = new Order(order);
+
+        if (order.getUser() != null){
+            Optional<User> foundUser = ur.findById(order.getUser().getUser_id());
+            if (foundUser.isPresent()){
+                sendOrder.setUser(foundUser.get());
+            } else {
+                throw new UserNotFoundException();
+            }
+        }
+
+        Order savedOrder = or.save(sendOrder);
+        return new OrderDTO(savedOrder);
     }
 
     public List<OrderDTO> getUserOrders(String userId){
         Optional<User> foundUser = ur.findById(userId);
         if (foundUser.isPresent()){
-            //get user
-            User user = foundUser.get();
 
             //get list of orders from db
-            List<Order> foundOrders = or.findByUser(user);
+            List<Order> foundOrders = or.findByUser(foundUser.get());
 
             //convert orders into orderDTOs
             List<OrderDTO> sendOrders = new ArrayList<>();
