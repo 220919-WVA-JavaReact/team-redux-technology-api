@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -20,10 +21,14 @@ public class OrderController {
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Order> postOrder(@RequestBody Order order){
-        Order orderToSave = os.saveOrder(order);
+    public ResponseEntity<List<OrderDTO>> postOrder(@RequestBody List<OrderDTO> orders){
 
-        return new ResponseEntity<>(orderToSave, HttpStatus.CREATED);
+        List<OrderDTO> ordersSaved = new ArrayList<>();
+        for (OrderDTO order : orders){
+            ordersSaved.add(os.saveOrder(order));
+        }
+
+        return new ResponseEntity<>(ordersSaved, HttpStatus.CREATED);
     }
 
     @GetMapping("/{user_id}")
