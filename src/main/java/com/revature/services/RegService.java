@@ -22,12 +22,24 @@ public class RegService {
     }
 
     @Transactional
-    public UserDTO register(RegisterDTO reg){
+    public UserDTO register(RegisterDTO reg) {
+
+        if (reg.getUsername() == null || reg.getUsername().equals("") || reg.getPassword() == null || reg.getPassword().equals("")) {
+            throw new LoginException();
+        }
 
         if (usr.findUserByUsername(reg.getUsername()).isPresent()) {
-        throw new LoginException(); }
+            throw new LoginException();
+        } else {
 
-        User user = usr.save(new User(reg.getFirst_name(), reg.getLast_name(), reg.getUsername(), reg.getPassword(), reg.getEmail()));
-        return new UserDTO(user);
+            User user = new User();
+            user.setFirst_name(reg.getFirst_name());
+            user.setLast_name(reg.getLast_name());
+            user.setUsername(reg.getUsername());
+            user.setPassword(reg.getPassword());
+            user.setEmail(reg.getEmail());
+
+            return new UserDTO(usr.save((user)));
+        }
     }
 }
