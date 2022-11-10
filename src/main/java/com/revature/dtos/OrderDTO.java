@@ -20,4 +20,11 @@ public class OrderDTO {
         this.quantity = order.getQuantity();
         this.purchase_date = order.getPurchase_date();
     }
+
+    public OrderDTO(UserDTO user, Item item, int quantity, Timestamp purchase_date) {
+        this.user = user;
+        this.item = item;
+        this.quantity = quantity;
+        this.purchase_date = purchase_date;
+    }
 }
