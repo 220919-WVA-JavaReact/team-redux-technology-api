@@ -10,6 +10,7 @@ public class UserDTO {
     private String username;
     private Role role;
 
+    public UserDTO() {}
     public UserDTO(User user){
         this.user_id = user.getUser_id();
         this.username = user.getUsername();
