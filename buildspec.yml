@@ -8,8 +8,8 @@ phases:
       - mvn clean package -Pprod
   post_build:
     commands:
-      -mv target/*.jar ./[your-app-name].jar
+      -mv target/*.jar ./minecraft-store.jar
 
 artifacts:
   files:
-    - [your-app-name].jar
+    - minecraft-store.jar
