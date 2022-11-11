@@ -21,14 +21,14 @@ public class OrderController {
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResponseEntity<List<OrderDTO>> postOrder(@RequestBody List<OrderDTO> orders){
+    public ResponseEntity<OrderDTO> postOrder(@RequestBody List<OrderDTO> orders){
 
-        List<OrderDTO> ordersSaved = new ArrayList<>();
         for (OrderDTO order : orders){
-            ordersSaved.add(os.saveOrder(order));
+            if (os.saveOrder(order) != null){
+                System.out.println("Saved order");
+            };
         }
-
-        return new ResponseEntity<>(ordersSaved, HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping("/{user_id}")
