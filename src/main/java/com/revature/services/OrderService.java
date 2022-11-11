@@ -25,20 +25,15 @@ public class OrderService {
         this.ur = ur;
     }
 
-    public OrderDTO saveOrder(OrderDTO order){
+    public Order saveOrder(OrderDTO order){
         Order sendOrder = new Order(order);
 
         if (order.getUser() != null){
             Optional<User> foundUser = ur.findById(order.getUser().getUser_id());
-            if (foundUser.isPresent()){
-                sendOrder.setUser(foundUser.get());
-            } else {
-                throw new UserNotFoundException();
-            }
+            foundUser.ifPresent(sendOrder::setUser);
         }
 
-        Order savedOrder = or.save(sendOrder);
-        return new OrderDTO(savedOrder);
+        return or.save(sendOrder);
     }
 
     public List<OrderDTO> getUserOrders(String userId){
