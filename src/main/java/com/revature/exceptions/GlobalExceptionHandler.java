@@ -15,12 +15,17 @@ public class GlobalExceptionHandler {
 
     @ResponseStatus(value = HttpStatus.UNAUTHORIZED, reason = "User needs to be signed in to perform this operation.")
     @ExceptionHandler(AuthenticationException.class)
-    public void handleAuthenticationException(){}
+    public void handleAuthenticationException(){
+    }
 
     @ResponseStatus(value = HttpStatus.NOT_FOUND, reason= "User not found.")
     @ExceptionHandler(UserNotFoundException.class)
     public void handleUserNotFoundException(){
+    }
 
+    @ResponseStatus(value = HttpStatus.UNAUTHORIZED, reason = "User does not have the permissions to perform this operation.")
+    @ExceptionHandler(AuthorizationException.class)
+    public void handleAuthorizationException(){
     }
 
 }

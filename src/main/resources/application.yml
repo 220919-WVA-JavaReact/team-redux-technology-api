@@ -1,8 +1,13 @@
 spring:
   profiles:
     active:
-      - "@profileActive"
-
+      - "@profileActive@"
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - "*"
 jwt:
   secret: 5468576D5A7133743677397A24432646294A404E635266556A586E3272357537
 
