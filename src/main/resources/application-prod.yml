@@ -6,6 +6,6 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: validate # specifies how hibernate should interact with existing tables
+      ddl-auto: create # specifies how hibernate should interact with existing tables
 server:
   port: 5000
