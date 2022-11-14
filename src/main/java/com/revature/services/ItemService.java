@@ -6,6 +6,7 @@ import com.revature.utils.Material;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.security.auth.login.LoginException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +28,7 @@ public class ItemService {
 
     public List<Item> getRandomItems(int count){
         // this is for "featured items" in the home page.
-        // i want to get a randomized list of several items to display on that page
+        //  want to get a randomized list of several items to display on that page
 
         List<Item> allItems = ir.findAll();
         // first get all the items
@@ -56,4 +57,14 @@ public class ItemService {
     public Item getItemByNameAndMaterial(String name, String material){
         return ir.findByNameAndMaterialAllIgnoreCase(name, Material.valueOf((material)));
     }
+
+
+public Item updateItem(String id, Item item) throws LoginException {
+    Item singleItem = ir.findById(id).orElseThrow(LoginException::new);
+    singleItem.setPrice(item.getPrice());
+    ir.save(singleItem);
+
+    return singleItem;
+}
+
 }
