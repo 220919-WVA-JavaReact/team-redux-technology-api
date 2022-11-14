@@ -1,12 +1,12 @@
 package com.revature.services;
 
 import com.revature.entities.Item;
+import com.revature.exceptions.ItemNotFoundException;
 import com.revature.repositories.ItemRepository;
 import com.revature.utils.Material;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.security.auth.login.LoginException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -59,8 +59,8 @@ public class ItemService {
     }
 
 
-public Item updateItem(String id, Item item) throws LoginException {
-    Item singleItem = ir.findById(id).orElseThrow(LoginException::new);
+public Item updateItem(String id, Item item) throws ItemNotFoundException {
+    Item singleItem = ir.findById(id).orElseThrow(ItemNotFoundException::new);
     singleItem.setPrice(item.getPrice());
     ir.save(singleItem);
 
