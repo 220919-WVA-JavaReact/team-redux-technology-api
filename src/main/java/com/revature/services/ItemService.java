@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import com.revature.entities.Item;
+import com.revature.exceptions.ItemNotFoundException;
 import com.revature.repositories.ItemRepository;
 import com.revature.utils.Material;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class ItemService {
 
     public List<Item> getRandomItems(int count){
         // this is for "featured items" in the home page.
-        // i want to get a randomized list of several items to display on that page
+        //  want to get a randomized list of several items to display on that page
 
         List<Item> allItems = ir.findAll();
         // first get all the items
@@ -56,4 +57,14 @@ public class ItemService {
     public Item getItemByNameAndMaterial(String name, String material){
         return ir.findByNameAndMaterialAllIgnoreCase(name, Material.valueOf((material)));
     }
+
+
+public Item updateItem(String id, Item item) throws ItemNotFoundException {
+    Item singleItem = ir.findById(id).orElseThrow(ItemNotFoundException::new);
+    singleItem.setPrice(item.getPrice());
+    ir.save(singleItem);
+
+    return singleItem;
+}
+
 }
