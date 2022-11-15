@@ -1,13 +1,14 @@
 package com.revature.controllers;
 
+import com.revature.annotations.Permissions;
 import com.revature.entities.Item;
+import com.revature.exceptions.ItemNotFoundException;
 import com.revature.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.security.auth.login.LoginException;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,8 +51,7 @@ public class ItemController {
         return new ResponseEntity<>(is.getItemByNameAndMaterial(name, material), HttpStatus.OK);
     }
 
-
-//    @Permissions(rolesAllowed = {"ADMIN"})
+    @Permissions(rolesAllowed = {"ADMIN"})
     @PutMapping(value = "/{id}", consumes = "application/json", produces = "application/json")
     //Update Item price by id
     public ResponseEntity<Item> updateItem(
@@ -59,7 +59,7 @@ public class ItemController {
         Item price = null;
         try {
             price = is.updateItem(id, item);
-        } catch (LoginException e) {
+        } catch (ItemNotFoundException e) {
             throw new RuntimeException(e);
         }
         return new ResponseEntity<>(price, HttpStatus.OK);
