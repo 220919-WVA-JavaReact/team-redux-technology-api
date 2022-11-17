@@ -32,6 +32,11 @@ public class Item {
         this.item_id = UUID.randomUUID().toString();
     }
 
+    public Item(String id){
+        this.item_id = id;
+    }
+
+
     public String getItem_id() {
         return item_id;
     }
