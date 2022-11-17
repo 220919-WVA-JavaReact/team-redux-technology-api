@@ -10,7 +10,6 @@ import com.revature.repositories.UserRepository;
 import com.revature.services.OrderService;
 import com.revature.utils.Material;
 import com.revature.utils.Role;
-import org.aspectj.weaver.ast.Or;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,8 +37,40 @@ public class OrderServiceTest {
 
     @Test
     public void saveOrderTest(){
+        User user = new User();
+        user.setUser_id("1");
+        user.setUsername("roger");
+        user.setPassword("pass");
+        user.setFirst_name("roger");
+        user.setLast_name("chau");
+        user.setEmail("roger@email.com");
+        user.setRole(Role.BUYER);
+
+        Item item = new Item();
+        item.setItem_id("1");
+        item.setImage("image");
+        item.setName("SWORD");
+        item.setPrice(99.99);
+        item.setMaterial(Material.NETHERITE);
+
+        Order order = new Order();
+        order.setOrder_id("1");
+        order.setUser(user);
+        order.setItem(item);
+        order.setQuantity(2);
+        order.setPurchase_date(new Timestamp(System.currentTimeMillis()));
+
+        Order expected = order;
+
+        OrderDTO send = new OrderDTO(order);
+
+        Mockito.when(ur.findById("1")).thenReturn(Optional.of(user));
+        Mockito.when(or.save(Mockito.any(Order.class))).thenReturn(order);
+
+        Order actual = os.saveOrder(send);
 
 
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -81,6 +111,5 @@ public class OrderServiceTest {
         List<OrderDTO> actual = os.getUserOrders("1");
 
         assertEquals(expected, actual);
-
     }
 }
