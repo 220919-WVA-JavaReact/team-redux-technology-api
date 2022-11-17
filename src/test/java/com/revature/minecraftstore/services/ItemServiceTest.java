@@ -75,15 +75,15 @@ public class ItemServiceTest {
         items.add(item2);
         items.add(item3);
 
-        List<Item> test = new ArrayList<>();
-        test.add(test1);
-        test.add(test2);
-        test.add(test3);
+        List<Item> expected = new ArrayList<>();
+        expected.add(test1);
+        expected.add(test2);
+        expected.add(test3);
 
         Mockito.when(ir.findAll()).thenReturn(items);
          List<Item> actual = is.getAllItems();
 
-         assertEquals(actual, test);
+         assertEquals(expected, actual);
     }
 
     @Test
@@ -95,17 +95,17 @@ public class ItemServiceTest {
         item1.setPrice(100.99);
         item1.setMaterial(Material.NETHERITE);
 
-        Item item2 = new Item();
-        item2.setItem_id("2");
-        item2.setImage("photo2");
-        item2.setName("Sword");
-        item2.setPrice(50.99);
-        item2.setMaterial(Material.DIAMOND);
+        Item expected = new Item();
+        expected.setItem_id("1");
+        expected.setImage("photo1");
+        expected.setName("Hoe");
+        expected.setPrice(100.99);
+        expected.setMaterial(Material.NETHERITE);
 
         Mockito.when(ir.findById(item1.getItem_id())).thenReturn(Optional.of(item1));
 
         Optional<Item> actual = is.getItemById("1");
-        assertEquals(actual, Optional.of(item1));
+        assertEquals(Optional.of(expected), actual);
     }
 
     @Test
@@ -117,17 +117,17 @@ public class ItemServiceTest {
         item1.setPrice(100.99);
         item1.setMaterial(Material.NETHERITE);
 
-        Item item2 = new Item();
-        item2.setItem_id("2");
-        item2.setImage("photo2");
-        item2.setName("Sword");
-        item2.setPrice(50.99);
-        item2.setMaterial(Material.DIAMOND);
+        Item expected = new Item();
+        expected.setItem_id("2");
+        expected.setImage("photo2");
+        expected.setName("Sword");
+        expected.setPrice(50.99);
+        expected.setMaterial(Material.DIAMOND);
 
-        Mockito.when(is.getItemByNameAndMaterial("Sword", "DIAMOND")).thenReturn(item2);
+        Mockito.when(is.getItemByNameAndMaterial("Sword", "DIAMOND")).thenReturn(expected);
 
         Item actual = is.getItemByNameAndMaterial("Sword", "DIAMOND");
-        assertEquals(actual, item2);
+        assertEquals(expected, actual);
     }
 
     @Test
