@@ -28,42 +28,35 @@ public class RegServiceTest {
 
     @Test
     public void registerSuccessful(){
-        User user = new User();
 
-        Mockito.when(mockRepository.findUserByUsername("rogelio")).thenReturn(Optional.of(Boolean.FALSE));
-        RegisterDTO login = new RegisterDTO();
-        login.setUsername("rogelio");
-        login.setPassword("pass");
-        login.setFirst_name("roger");
-        login.setLast_name("chou");
-        login.setEmail("poop@email.com");
+        // these are our input fields
+        RegisterDTO input = new RegisterDTO();
+        input.setUsername("notrogelio");
+        input.setPassword("pass");
+        input.setFirst_name("roger");
+        input.setLast_name("chou");
+        input.setEmail("poop@email.com");
 
-        user.setUser_id("10");
-        user.setUsername(login.getUsername());
-        user.setPassword(login.getPassword());
-        user.setFirst_name(login.getFirst_name());
-        user.setLast_name(login.getLast_name());
-        user.setEmail(login.getEmail());
-        user.setRole(Role.BUYER);
+        // this is checking the db for an existing user
+        Mockito.when(mockRepository.findUserByUsername("notrogelio")).thenReturn(Optional.empty());
 
-        UserDTO herro = new UserDTO();
-        herro.setUser_id("10");
-        herro.setUsername("rogelio");
-        herro.setRole(Role.BUYER);
+        User createdUser = new User();
+        createdUser.setUser_id   ("10");
+        createdUser.setUsername  (input.getUsername());
+        createdUser.setPassword  (input.getPassword());
+        createdUser.setFirst_name(input.getFirst_name());
+        createdUser.setLast_name (input.getLast_name());
+        createdUser.setEmail     (input.getEmail());
+        createdUser.setRole(Role.BUYER);
 
 
-        Mockito.when(mockRepository.save(user)).thenReturn(user);
-
-        UserDTO expected = new UserDTO();
-        expected.setUser_id("10");
-        expected.setUsername("rogelio");
-        expected.setRole(Role.BUYER);
-
+        UserDTO expected = new UserDTO(createdUser);
         System.out.println("Expected " + expected);
-        UserDTO actual = rs.register(login);
+
+
+        Mockito.when(mockRepository.save(Mockito.any(User.class))).thenReturn(createdUser);
+        UserDTO actual = rs.register(input);
         System.out.println("Actual: " + actual);
-
-
 
         assertEquals(expected, actual);
     }

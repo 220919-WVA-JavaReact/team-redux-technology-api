@@ -5,11 +5,13 @@ import com.revature.dtos.UserDTO;
 import com.revature.entities.User;
 import com.revature.exceptions.LoginException;
 import com.revature.repositories.UserRepository;
+import com.revature.utils.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.beans.Transient;
+import java.util.Optional;
 
 @Service
 public class RegService {
@@ -28,10 +30,11 @@ public class RegService {
             throw new LoginException();
         }
 
-        if (usr.findUserByUsername(reg.getUsername()).isPresent()) {
+        Optional<User> foundUser = usr.findUserByUsername(reg.getUsername());
+
+        if (foundUser.isPresent()){
             throw new LoginException();
         } else {
-
             User user = new User();
             user.setFirst_name(reg.getFirst_name());
             user.setLast_name(reg.getLast_name());
@@ -39,7 +42,8 @@ public class RegService {
             user.setPassword(reg.getPassword());
             user.setEmail(reg.getEmail());
 
-            return new UserDTO(usr.save((user)));
+            User savedUser = usr.save(user);
+            return new UserDTO(savedUser);
         }
     }
 }
